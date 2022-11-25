@@ -4,16 +4,15 @@ const redirectUri = "https://www.jaden-hoenes.github.io/spotifyEmbed/";
 
 console.log('loaded');
 
-const formData = new FormData();
-formData.append("grant_type", "client_credentials")
-
 const apiToken = fetch("https://accounts.spotify.com/api/token", {
   method: "POST",
   headers: {
     Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
-    Content-Type: "application/x-www-form-urlencoded"
+    "Content-Type": "application/x-www-form-urlencoded"
   },
-  body: formData,
+  body: JSON.stringify({
+    grant_type: "client_credentials"
+  }),
 }).then(res => res.json());
 
 console.log(apiToken);
